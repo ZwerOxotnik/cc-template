@@ -4,10 +4,10 @@ local mod_commands = require("mod-commands")
 local MOD_SHORT_NAME = "cct_"
 
 local commands = {}
-for _, command in pairs(mod_commands) do
+for key, command in pairs(mod_commands) do
 	commands[#commands + 1] = {
 		type = "bool-setting",
-		name = MOD_SHORT_NAME .. command.name,
+		name = MOD_SHORT_NAME .. key,
 		setting_type = "runtime-global",
 		default_value = command.default_value or true
 	}
