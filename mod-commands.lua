@@ -11,6 +11,7 @@ Returns table of commands without functions as command "settings". All parameter
         "player" - Stops execution if can't find a player by parameter
         "team" - Stops execution if can't find a team (force) by parameter
     allow_for_server :: bool: Allow execution of a command from a server (default: false)
+    only_for_admin :: bool: The command can be executed only by admins (default: false)
 ]]--
 
 return {
