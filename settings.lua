@@ -1,6 +1,7 @@
 local mod_commands = require("mod-commands")
 
 -- change this \/ in your mod!
+-- Don't use symbols like '-' etc (it'll break pattern of regular expressions)
 local MOD_SHORT_NAME = "cct_"
 
 local commands = {}

@@ -2,6 +2,7 @@ local mod_commands = require("mod-commands")
 local example_module = require("example-1") -- delete/replace it in your mod
 
 -- change this \/ in your mod!
+-- Don't use symbols like '-' etc (it'll break pattern of regular expressions)
 local MOD_SHORT_NAME = "cct_"
 
 local function trim(s)
@@ -104,14 +105,16 @@ local function check_custom_addons_on_runtime_mod_setting_changed(event)
 	if event.setting_type ~= "runtime-global" then return end
 	if string.find(event.setting, '^' .. MOD_SHORT_NAME) ~= 1 then return end
 
-	local command_name = string.gsub(event.setting, regExpr, "")
+	local command_name = string.gsub(event.setting, '^' .. MOD_SHORT_NAME, "")
 	local func = example_module.commands[command_name] -- WARNING: check this throughly!
 	local command_settings = mod_commands[command_name] or {}
 	local state = settings.global[event.setting].value
 	command_settings.name = command_settings.name or command_name
 	if state then
+		game.print("Added command: " .. command_settings.name or command_name)
 		add_custom_command(command_settings, func)
 	else
+		game.print("Removed command: " .. command_settings.name or command_name)
 		commands.remove_command(command_settings.name or command_name)
 	end
 end
