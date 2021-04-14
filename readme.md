@@ -6,10 +6,17 @@ This template for mod developers to simplify filtering of commands and gives abi
 
 This template requires "zk-lib" mod only for localization. You can remove the dependency and put your locales.
 
+## Features
+
+* Filters of commands
+* Switchable commands via map settings
+* Error handling of commands
+
 ## Example
 
 You can use this source as a mod to check commands and new map settings in any game:
-```
+
+```txt
 /test-1 /test-2 /test3 /test4
 ```
 
@@ -18,17 +25,12 @@ You can use this source as a mod to check commands and new map settings in any g
 * [contorl.lua](/control.lua) - contains logic for the system (change it to add/change commands/modules/events etc)
 * [example-1.lua](/example-1.lua) - uses as a module with simple commands (you can delete it in your mod)
 
-## Features
-
-* Filters for commands before execution a command
-* You turn on/off some commands during game via map settings
-* Error handling of commands with printing of errors
-
 ## LICENSE
 
 I'm interested in distributing code as freely as possible.
 
 Copyright (c) 2021 ZwerOxotnik <zweroxotnik@gmail.com>
+
 Licensed under the MIT licence.
 
 ```
