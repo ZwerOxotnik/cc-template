@@ -21,7 +21,8 @@ You can use this source as a mod to check commands and new map settings in any g
 ## Features
 
 * Filters for commands before execution a command
-* You turn on/off commands during game via map settings
+* You turn on/off some commands during game via map settings
+* Error handling of commands with printing of errors
 
 ## LICENSE
 
