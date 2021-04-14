@@ -25,7 +25,7 @@ local input_types = {
 	player = player_input_type,
 	team = team_input_type
 }
-local function add_custom_command(command_settings, original_func)
+local function add_custom_command(command_settings, original_func, key_command)
 	local input_type = input_types[command_settings.input_type]
 	local is_allowed_empty_args = command_settings.is_allowed_empty_args
 	local command_name = command_settings.name
@@ -99,6 +99,16 @@ local function add_custom_command(command_settings, original_func)
 		if is_message_sended == false then
 			log(error_message)
 		end
+
+		-- Turns off the command
+		if key_command then
+			local setting_name = MOD_SHORT_NAME .. key_command
+			if settings.global[setting_name] then
+				settings.global[setting_name] = {
+					value = false
+				}
+			end
+		end
 	end)
 end
 
@@ -111,8 +121,10 @@ local function handle_custom_commands(module)
 			setting = settings.global[MOD_SHORT_NAME .. key]
 		end
 
-		if setting == nil or setting.value then
+		if setting == nil then
 			add_custom_command(command_settings, func)
+		elseif setting.value then
+			add_custom_command(command_settings, func, key)
 		else
 			commands.remove_command(command_settings.name)
 		end
@@ -125,12 +137,12 @@ local function check_custom_addons_on_runtime_mod_setting_changed(event)
 
 	local command_name = string.gsub(event.setting, '^' .. MOD_SHORT_NAME, "")
 	local func = example_module.commands[command_name] -- WARNING: check this throughly!
-	local command_settings = mod_commands[command_name] or {}
+	local command_settings = SWITCHABLE_COMMANDS[command_name] or {}
 	local state = settings.global[event.setting].value
 	command_settings.name = command_settings.name or command_name
 	if state then
 		game.print("Added command: " .. command_settings.name or command_name)
-		add_custom_command(command_settings, func)
+		add_custom_command(command_settings, func, command_name)
 	else
 		game.print("Removed command: " .. command_settings.name or command_name)
 		commands.remove_command(command_settings.name or command_name)

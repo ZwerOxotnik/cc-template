@@ -1,3 +1,5 @@
+local module = {}
+
 --[[
 Recommended to know about https://lua-api.factorio.com/latest/LuaCommandProcessor.html#LuaCommandProcessor.add_command
 
@@ -13,10 +15,16 @@ Returns tables of commands without functions as command "settings". All paramete
     allow_for_server :: bool: Allow execution of a command from a server (default: false)
     only_for_admin :: bool: The command can be executed only by admins (default: false)
 ]]--
+module.get_commands = function()
+	local switchable_commands = {
+    test1 = {name = "test-1", description = "test1-command-description", input_type = "player"},
+    test2 = {name = "test-2", description = {"test2-command-description"}, is_allowed_empty_args = true, input_type = "team", allow_for_server = true},
+    test3 = {name = "test3", default_value = false, only_for_admin = true},
+    test4 = {name = "test4", default_value = false, only_for_admin = true}
+  }
+  local const_commands = {}
 
-return {
-  test1 = {name = "test-1", description = "test1-command-description", input_type = "player"},
-  test2 = {name = "test-2", description = {"test2-command-description"}, is_allowed_empty_args = true, input_type = "team", allow_for_server = true},
-  test3 = {name = "test3", default_value = false, only_for_admin = true},
-  test4 = {name = "test4", default_value = false, only_for_admin = true}
-}
+  return switchable_commands, const_commands
+end
+
+return module
