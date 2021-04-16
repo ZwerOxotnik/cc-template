@@ -1,3 +1,5 @@
+-- This template from https://github.com/ZwerOxotnik/cc-template
+
 local all_commands = {} -- commands from other modules
 local module = {} -- this module
 
