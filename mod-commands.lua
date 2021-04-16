@@ -1,5 +1,5 @@
-local modules = {}
-local module = {}
+local all_commands = {} -- commands from other modules
+local module = {} -- this module
 
 -- change this \/ in your mod!
 -- Don't use symbols like '-' etc (it'll break pattern of regular expressions)
@@ -139,16 +139,17 @@ end
 
 module.handle_custom_commands = function(module)
   if type(module.commands) ~= "table" then
-    log("Current don't have proper commands")
+    log("Current module don't have proper commands")
     return false
   end
 
-  for _, added_module in pairs(modules) do 
-    if added_module == module then
-      return
+  for _, added_commands in pairs(commands) do 
+    if added_commands == module.commands then
+      log("Current commands was added before")
+			return
     end
   end
-  table.insert(modules, module)
+  table.insert(all_commands, module.commands)
 
 	for key, func in pairs(module.commands) do
 		local command_settings = SWITCHABLE_COMMANDS[key] or CONST_COMMANDS[key] or {}
@@ -170,9 +171,9 @@ module.handle_custom_commands = function(module)
   return true
 end
 
-local function find_func_by_command(command_name)
-  for _, module in pairs(modules) do
-    local func = module.commands[command_name]
+local function find_func_by_command_name(command_name)
+  for _, some_commands in pairs(all_commands) do
+    local func = some_commands[command_name]
     if func then
       return func
     end
@@ -184,7 +185,7 @@ module.on_runtime_mod_setting_changed = function(event)
 	if string.find(event.setting, '^' .. MOD_SHORT_NAME) ~= 1 then return end
 
 	local command_name = string.gsub(event.setting, '^' .. MOD_SHORT_NAME, "")
-	local func = find_func_by_command(command_name) -- WARNING: check this throughly!
+	local func = find_func_by_command_name(command_name) -- WARNING: check this throughly!
 	if func == nil then
     log("Didn't find '" .. command_name .. "' among commands in modules")
   end
@@ -200,11 +201,12 @@ module.on_runtime_mod_setting_changed = function(event)
 	end
 end
 
+-- Adds settings for commands, so we can disable commands by settings
 module.set_settings = function()
-  local commands = {}
+  local new_settings = {}
   for key, command in pairs(SWITCHABLE_COMMANDS) do
     local command_name = command.name or key
-    commands[#commands + 1] = {
+    new_settings[#new_settings + 1] = {
       type = "bool-setting",
       name = MOD_SHORT_NAME .. key,
       setting_type = "runtime-global",
@@ -213,7 +215,7 @@ module.set_settings = function()
       localised_description = command.description or ""
     }
   end
-  data:extend(commands)
+  data:extend(new_settings)
 end
 
 return module
