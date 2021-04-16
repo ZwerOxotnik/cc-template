@@ -11,6 +11,7 @@ This template requires "zk-lib" mod only for localization. You can remove the de
 * Filters of commands
 * Switchable commands via map settings
 * Error handling of commands
+* Simple integration
 
 ## Example
 
@@ -20,9 +21,9 @@ You can use this source as a mod to check commands and new map settings in any g
 /test-1 /test-2 /test3 /test4
 ```
 
-* [settings.lua](/settings.lua) - creates new settings to give ability to turn on/off commands via map settings. (requires 1 tweak for your mod)
-* [mod-commands.lua](/mod-commands) - contains table of commands without functions as command "settings". (change it for your necessities)
-* [contorl.lua](/control.lua) - contains logic for the system (change it to add/change commands/modules/events etc)
+* [settings.lua](/settings.lua) - creates new settings to give ability to turn on/off commands via map settings.
+* [mod-commands.lua](/mod-commands) - contains a module for interation on control and data stage. (change it for your necessities)
+* [contorl.lua](/control.lua) - handles events and uses modules.
 * [example-1.lua](/example-1.lua) - uses as a module with simple commands (you can delete it in your mod)
 
 ## LICENSE
