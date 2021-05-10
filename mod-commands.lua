@@ -182,7 +182,7 @@ local function find_func_by_command_name(command_name)
   end
 end
 
-module.on_runtime_mod_setting_changed = function(event)
+local function on_runtime_mod_setting_changed(event)
 	if event.setting_type ~= "runtime-global" then return end
 	if string.find(event.setting, '^' .. MOD_SHORT_NAME) ~= 1 then return end
 
@@ -219,5 +219,9 @@ module.set_settings = function()
   end
   data:extend(new_settings)
 end
+
+module.events = {
+	on_runtime_mod_setting_changed = on_runtime_mod_setting_changed
+}
 
 return module
