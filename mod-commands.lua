@@ -15,7 +15,7 @@ Returns tables of commands without functions as command "settings". All paramete
   Contains:
   	name :: string: The name of your /command. (default: key of the table)
   	description :: string or LocalisedString: The description of your command. (default: nil)
-  	is_allowed_empty_args :: bool: Ignores empty parameters in commands, otherwise stops the command.  (default: true)
+  	is_allowed_empty_args :: bool: Ignores empty parameters in commands, otherwise stops the command. (default: true)
   	input_type :: string: filter for parameters by type of input. (default: nil)
       possible variants:
         "player" - Stops execution if can't find a player by parameter
@@ -221,7 +221,7 @@ module.set_settings = function()
 end
 
 module.events = {
-	on_runtime_mod_setting_changed = on_runtime_mod_setting_changed
+	[defines.events.on_runtime_mod_setting_changed] = on_runtime_mod_setting_changed
 }
 
 return module
