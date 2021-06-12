@@ -6,12 +6,12 @@ This template for mod developers to simplify filtering of commands and gives abi
 
 This template requires "[zk-lib](https://github.com/ZwerOxotnik/zk-lib)" mod for localization only. You can remove the dependency and put your own locales.
 
-## Features
+## What it can do
 
-* Filters of commands
-* Switchable commands via map settings
-* Error handling of commands
-* Simple integration (4+ lines)
+* Filter parameters of commands
+* Add switchable commands via map settings
+* Use built-in error handling of commands
+* Has simple integration (4+ lines)
 
 ## Example
 
