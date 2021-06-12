@@ -4,7 +4,7 @@
 
 This template for mod developers to simplify filtering of commands and gives ability to turn on/off commands via map settings.
 
-This template requires "zk-lib" mod only for localization. You can remove the dependency and put your locales.
+This template requires "[zk-lib](https://github.com/ZwerOxotnik/zk-lib)" mod for localization only. You can remove the dependency and put your own locales.
 
 ## Features
 
@@ -24,7 +24,7 @@ You can use this source as a mod to check commands and new map settings in any g
 * [settings.lua](/settings.lua) - creates new settings to give ability to turn on/off commands via map settings.
 * [mod-commands.lua](/mod-commands) - contains a module for interation on control and data stage. (**change commands there** and adapt scripts if you want)
 * [contorl.lua](/control.lua) - handles events and uses modules.
-* [example-1.lua](/example-1.lua) - uses as a module with simple commands (you can delete it in your mod)
+* [example-1.lua](/example-1.lua) - uses as a module with simple commands and contains logic of commands (you can delete it in your mod)
 
 ## LICENSE
 
