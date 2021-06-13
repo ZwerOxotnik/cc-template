@@ -148,7 +148,7 @@ module.handle_custom_commands = function(module)
   for _, added_commands in pairs(commands) do 
     if added_commands == module.commands then
       log("Current commands was added before")
-			return
+        return true
     end
   end
   table.insert(all_commands, module.commands)
