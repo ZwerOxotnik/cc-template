@@ -217,7 +217,9 @@ module.set_settings = function()
       localised_description = command.description or ""
     }
   end
-  data:extend(new_settings)
+  if #new_settings > 0 then
+    data:extend(new_settings)
+  end
 end
 
 module.events = {
