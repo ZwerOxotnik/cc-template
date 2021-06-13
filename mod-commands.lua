@@ -118,7 +118,7 @@ local function add_custom_command(command_settings, original_func, key_command)
 
 		local is_message_sended = false
 		for _, player in pairs(game.connected_players) do
-			if player.admin then
+			if player.valid and player.admin then
 				player.print(error_message)
 				is_message_sended = true
 			end
